@@ -4,7 +4,9 @@
 package edu.cvtc.java.shapes;
 
 import javax.swing.JOptionPane;
+import javax.swing.Renderer;
 
+import edu.cvtc.java.Dialog;
 import edu.cvtc.java.Shape;
 
 /**
@@ -12,7 +14,7 @@ import edu.cvtc.java.Shape;
  *
  */
 //Class for Sphere which inherits from Shape
-public class Sphere extends Shape {
+public class Sphere extends Shape implements Renderer {
 	
 	// variable for radius, set to 0.0
 	private float radius = (float) 0.0;
@@ -29,8 +31,8 @@ public class Sphere extends Shape {
 	}
 	
 	// Sphere constructor, passing in radius
-	public Sphere(float radius) {
-		
+	public Sphere(Dialog messageBox, float radius) {
+		super(messageBox);
 		setRadius(radius);
 	}
 	
@@ -51,13 +53,13 @@ public class Sphere extends Shape {
 	 * If they are < = 0, display a dialog box alerting the user this shape's measurements are wrong
 	 * If they are > 0, display a dialog box with the shape's surface area and volume.
 	 */
-	@Override
+	
 	public void render() {
 		if (surfaceArea() > 0 && volume() > 0  ) {
-			JOptionPane.showMessageDialog(null, "Sphere dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
+			messageBox.show(null, "Sphere dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
 			
 			}else {
-				JOptionPane.showMessageDialog(null, "The Sphere's radius dimension is incorrect, measurements must be greater than 0");
+				messageBox.show(null, "The Sphere's radius dimension is incorrect, measurements must be greater than 0");
 			}
 	}
 

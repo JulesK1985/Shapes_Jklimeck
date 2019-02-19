@@ -4,7 +4,9 @@
 package edu.cvtc.java.shapes;
 
 import javax.swing.JOptionPane;
+import javax.swing.Renderer;
 
+import edu.cvtc.java.Dialog;
 import edu.cvtc.java.Shape;
 
 /**
@@ -12,7 +14,7 @@ import edu.cvtc.java.Shape;
  *
  */
 //Class for Cylinder which inherits from Shape
-public class Cylinder extends Shape {
+public class Cylinder extends Shape implements Renderer{
 	
 	// variables for radius and height, set to 0.0
 	private float radius = (float) 0.0;
@@ -40,8 +42,8 @@ public class Cylinder extends Shape {
 	}
 	
 	// Cylinder constructor, passing in radius and height
-	public Cylinder(float radius, float height) {
-		
+	public Cylinder(Dialog messageBox, float radius, float height) {
+		super(messageBox);
 		setRadius(radius);
 		setHeight(height);
 	}
@@ -63,13 +65,13 @@ public class Cylinder extends Shape {
 	 * If they are < = 0, display a dialog box alerting the user this shape's measurements are wrong
 	 * If they are > 0, display a dialog box with the shape's surface area and volume.
 	 */
-	@Override
+	
 	public void render() {
 		if (surfaceArea() > 0 && volume() > 0  ) {
-			JOptionPane.showMessageDialog(null, "Cylinder dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
+			messageBox.show(null, "Cylinder dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
 			
 			}else {
-				JOptionPane.showMessageDialog(null, "One of the Cylinder's dimensions are incorrect, measurements must be greater than 0");
+				messageBox.show(null, "One of the Cylinder's dimensions are incorrect, measurements must be greater than 0");
 			}
 	}
 

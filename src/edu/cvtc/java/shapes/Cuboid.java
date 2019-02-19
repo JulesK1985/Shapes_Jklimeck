@@ -3,6 +3,7 @@
  */
 package edu.cvtc.java.shapes;
 import javax.swing.JOptionPane;
+import javax.swing.Renderer;
 
 import edu.cvtc.java.*;
 
@@ -11,7 +12,7 @@ import edu.cvtc.java.*;
  *
  */
 // Class for Cuboid which inherits from Shape
-public class Cuboid extends Shape {
+public class Cuboid extends Shape implements Renderer {
 	
 	// variables for width, height and depth, set to 0.0
 	private float width = (float) 0.0;
@@ -50,8 +51,8 @@ public class Cuboid extends Shape {
 	}
 	
 	// Cuboid constructor, passing in width, height and depth
-	public Cuboid(float width, float height, float depth) {
-		
+	public Cuboid(Dialog messageBox, float width, float height, float depth) {
+		super(messageBox);
 		setWidth(width);
 		setHeight(height);
 		setDepth(depth);
@@ -74,13 +75,13 @@ public class Cuboid extends Shape {
 	 * If they are < = 0, display a dialog box alerting the user this shape's measurements are wrong
 	 * If they are > 0, display a dialog box with the shape's surface area and volume.
 	 */
-	@Override
+	
 	public void render() {
 		if (surfaceArea() > 0 && volume() > 0  ) {
-		JOptionPane.showMessageDialog(null, "Cuboid dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
+		messageBox.show(null, "Cuboid dimensions: \nSurface Area: " + surfaceArea() +"\nVolume: " + volume());
 		
 		}else {
-			JOptionPane.showMessageDialog(null, "One of the Cuboid's dimensions are incorrect, measurements must be greater than 0");
+			messageBox.show(null, "One of the Cuboid's dimensions are incorrect, measurements must be greater than 0");
 		}
 	}
 	
